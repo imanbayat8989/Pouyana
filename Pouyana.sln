@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pouyana", "Pouyana\Pouyana.csproj", "{E5BD64CF-2182-4CEE-AB3D-4EAA87C69267}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pouyana", "Pouyana\Pouyana.csproj", "{E5BD64CF-2182-4CEE-AB3D-4EAA87C69267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlazorLibraries", "MyBlazorLibraries\MyBlazorLibraries.csproj", "{6D220C1C-97CB-4CE2-8DCD-EA9AF7726913}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlazorLibraries", "MyBlazorLibraries\MyBlazorLibraries.csproj", "{6D220C1C-97CB-4CE2-8DCD-EA9AF7726913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
