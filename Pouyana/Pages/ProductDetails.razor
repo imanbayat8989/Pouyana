@@ -1,7 +1,9 @@
 ﻿@page "/Product/{slug}"
 @using MyBlazorLibraries.Product
 @using MyBlazorLibraries.Product.Models
+@using MyBlazorLibraries.ShoppingCart.Models
 @inject IProductService productService
+@inject IShoppingCartService shoppingCartService
 
 @if(Product != null)
 {
@@ -25,6 +27,35 @@
                 <h2>@Product.Name</h2>
                 <hr />
                 <p class="text-success">قیمت: @Product.Price €</p>
+                <div class="row">
+                    @if(shoppingCartService.Count()>0)
+                {
+                    <p>اقلام موجود در سبد خرید: @shoppingCartService.Count() می باشد </p>
+                }
+                <div class="col-3">
+                    <input @bind="Quantity" type="number" placeholder="تعداد؟" class="form-control"/>
+                </div>
+                <div class="col-9">
+                    <button class="btn btn-outline-primary" @onclick="AddToCart">
+                    @if (shoppingCartService.HasProduct(Product.Sku))
+                    {
+                        <span>
+                            اضافه به سبد خرید
+                            @if(Quantity.HasValue)
+                            {
+                                <text>@Quantity بیشترش کن</text>
+                            }
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            اولین خریدت انجام بده
+                        </span>
+                    }
+                </button>
+                </div>
+                </div>
                 <ul>
                     @foreach(var product in ListProduct)
                     {
@@ -53,13 +84,18 @@
     public ProductModel? Product { get; set; }
     public IList<ProductModel>? ListProduct { get; set; }
 
+    public int? Quantity { get; set; }
+
     [Parameter]
     public string? slug { get; set; }
 
+}
+
+@functions{
     protected override void OnInitialized()
     {
         ListProduct = productService.GetAll();
-        if(!string.IsNullOrEmpty(slug))
+        if (!string.IsNullOrEmpty(slug))
         {
             Product = productService.GetProductBySlug(slug);
         }
@@ -73,7 +109,15 @@
         {
             Product = productService.GetProductBySlug(slug);
         }
-        base.OnInitialized();
         base.OnParametersSet();
+    }
+
+    public void AddToCart()
+    {
+        if (Product != null)
+        {
+            shoppingCartService.AddProduct(Product, Quantity ?? 1);
+            Quantity = null;
+        }
     }
 }

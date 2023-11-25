@@ -10,5 +10,7 @@ namespace MyBlazorLibraries.Storage
     public interface IStorageService
     {
         IList<ProductModel> Products { get; }
+
+        ShoppingCartModel? ShoppingCart { get; }
     }
 }

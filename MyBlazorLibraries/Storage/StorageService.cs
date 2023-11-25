@@ -1,4 +1,5 @@
 ﻿using MyBlazorLibraries.Product.Models;
+using MyBlazorLibraries.ShoppingCart.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,16 @@ namespace MyBlazorLibraries.Storage
 {
     public class StorageService : IStorageService
     {
-        public IList<ProductModel> Products { get;private set; }
+        public IList<ProductModel> Products { get;protected set; }
+
+        public ShoppingCartModel ShoppingCart { get; protected set; }
 
         public StorageService()
         {
             Products = new List<ProductModel>();
+            ShoppingCart = new ShoppingCartModel();
+           
+       
 
             AddProduct(new ProductModel("واقعیت افزوده", "پویانا", 20000, "product1.jpg"));
             AddProduct(new ProductModel("واقعیت مجازی", " پویانا کفشدوزکی", 30000, "product2.jpg"));
