@@ -8,7 +8,7 @@
     <PageTitle>@Product.Name</PageTitle>
 }
 
-<div class="row">
+
     @if(Product == null)
     {
         <div class="alert alert-warning">
@@ -17,12 +17,28 @@
     }
     else
     {
-        <h2>@Product.Name</h2>
-        <hr />
-        <img src="img/@Product.Image"/>
-        <p>قیمت : @Product.Price</p>
+        <div class="row">
+            <div class="col-3">
+                <img src="/Img/@Product.Image" class="img-thumbnail" style="width:100%"/>
+            </div>
+            <div class="col-9">
+                <h2>@Product.Name</h2>
+                <hr />
+                <p class="text-success">قیمت: @Product.Price €</p>
+                <ul>
+                    @foreach(var product in ListProduct)
+                    {
+                        <li>
+                            <a href="@product.FullUrl">
+                                @product.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     }
-</div>
+
 
 <div class="row">
     <h2>دیگر محصولات ما</h2>
@@ -48,6 +64,16 @@
             Product = productService.GetProductBySlug(slug);
         }
         base.OnInitialized();
-       
+
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrEmpty(slug))
+        {
+            Product = productService.GetProductBySlug(slug);
+        }
+        base.OnInitialized();
+        base.OnParametersSet();
     }
 }

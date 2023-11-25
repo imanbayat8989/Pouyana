@@ -9,11 +9,21 @@
                 @Product.Name
             </a>
         </h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">قیمت: @Product.Price</p>
         <naa href="#" class="btn btn-primary">نمایش جزئیات</naa>
     </div>
 </div>
 @code {
     [Parameter]
     public ProductModel? Product { get; set; }
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter,SupplyParameterFromQuery(Name ="سن کاربر مهمان")]
+    public string Age { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
 }
